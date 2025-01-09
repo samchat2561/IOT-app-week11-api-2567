@@ -18,9 +18,8 @@ app.get('/', (req, res) => {
     return res.status(200).json({ message: 'API Mobile-App' })
 })
 
-//GET API: http://localhost:3000/
+//GET API: http://localhost:3000/api/auth/register
 app.use('/api/auth', authRoute) //Auth route
-
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`)
