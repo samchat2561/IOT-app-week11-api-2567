@@ -1,6 +1,7 @@
 import express from 'express'
 import logger from 'morgan'
 import connectMongoDB from './config/db.js'
+import authRoute from './routes/authRoute.js'
 
 const app = express()
 
@@ -12,18 +13,14 @@ app.use(logger('dev'))//Logging middleware
 app.use(express.json())//Middleware to parse JSON data
 app.use(express.urlencoded({ extended: true })) //parse application/x-www-form-urlencoded
 
-//GET API: http://localhost:3000/
+//route for home page
 app.get('/', (req, res) => {
-    // res.send('Hello World!')
     return res.status(200).json({ message: 'API Mobile-App' })
 })
 
-//Reading content-type POST API: http://localhost:3000/
-app.post('/', (req, res) => {
-    console.log('Received data:', req.body)
-    // console.log('Name:', req.body.name)
-    // console.log('Email:', req.body.email)
-})
+//GET API: http://localhost:3000/
+app.use('/api/auth', authRoute) //Auth route
+
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`)
